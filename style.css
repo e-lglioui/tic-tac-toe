@@ -1,0 +1,119 @@
+/* Styles de base */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f4d0e5;
+}
+
+/* Styles pour la section des règles de jeu */
+.rgl {
+    margin: 20px;
+}
+
+.rgl h2 {
+    font-size: 24px;
+    color: #000000;
+}
+
+.rgl p {
+    font-size: 16px;
+    color: #555;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Styles pour la section de démarrage du jeu */
+.jouer {
+    margin: 20px;
+}
+
+.jouer .commancer {
+    font-size: 18px;
+    padding: 10px 20px;
+    background-color: #e7239f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.jouer .commancer:hover {
+    background-color: #d281bb;
+}
+
+/* Styles pour la section de jeu */
+.game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    /* background-color: azure; */
+}
+
+ .game-board {
+    display: grid;
+    grid-template-columns: repeat(20, 20px); 
+    grid-template-rows: repeat(20, 20px); 
+ }   
+.cell {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(241, 234, 238);
+    border: 1px solid #100f0f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+} 
+
+.cell:hover {
+    background-color: #ea84c6;
+}
+/* Style for the entire section */
+.joueur {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  /* Style for each player container */
+  .j1, .j2 {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(169, 66, 66, 0.1);
+  }
+  
+  /* Style for the tour element */
+  .tour {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Style for the score element */
+  .score {
+    font-size: 1.5em;
+    color: #555;
+  }
+  
+  /* Optional: add responsiveness */
+  @media (max-width: 600px) {
+    .joueur {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .j1, .j2 {
+      width: 80%;
+      margin-bottom: 10px;
+    }
+  }
+  

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+     
+    <!-- regles de jeu -->
+    <section class="rgl">
+    <h2>Tic Tac Toe </h2>
+    <p>Le but du jeu est de former une ligne continue de 5 blocs 
+    avec son propre symbole ('X' ou 'O').
+    Le joueur qui réussit à le faire en premier gagne la partie.</p>
+    </section>
+<!-- 
+    button por commancer le jeu -->
+    <section class="jouer">
+        <button class="commancer" id="commancer">jouer</button>
+    </section>
+
+
+    <section class="game">
+        <div id="game-board" class="game-board"></div>
+    </section>
+
+    <section class="joueur">
+        <div class="j1">
+            <div class="tour">X</div>
+            <div class="score" id="score-x">0</div>
+        </div>
+        <div class="j2">
+            <div class="tour">O</div>
+            <div class="score" id="score-o">0</div>
+        </div>
+    </section>
+    
+   <script src="script.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
