@@ -13,35 +13,45 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
         }
     }
-    function iniScore() {
-        if (!localStorage.getItem('score')) {
-            const iniscores = { x: 0, o: 0 };
-            localStorage.setItem('score', JSON.stringify(iniscores));
-        }
-        afficherscore(); 
-    }
-    iniScore();
-   
 
+    function iniScore() {
+      
+        if (!localStorage.getItem('scores')) {
+            const iniscores = { X: 0, O: 0 };
+            localStorage.setItem('scores', JSON.stringify(iniscores)); 
+        }
+        afficherscore();
+    }
+    
+    iniScore();
+    
     function updateScore(winner) {
-        const scores = JSON.parse(localStorage.getItem('score'));
+        console.log('Winner:', winner); 
+        const scores = JSON.parse(localStorage.getItem('scores'));
+        console.log(scores); 
+        console.log(scores[winner]); 
+    
         if (scores[winner] !== undefined) {
             scores[winner]++;
-            localStorage.setItem('score', JSON.stringify(scores));
-            afficherscore(); 
+            localStorage.setItem('scores', JSON.stringify(scores));
+            afficherscore();
         }
     }
-
+    
+    
     function afficherscore() {
-        const scores = JSON.parse(localStorage.getItem('score'));
+        const scores = JSON.parse(localStorage.getItem('scores'));
         if (scores) {
-            console.log('Scores:', scores); 
-            document.getElementById('score-x').textContent = scores.x;
-            document.getElementById('score-o').textContent = scores.o;
+            // console.log('Scores:', scores);
+            console.log(scores.X);
+            document.getElementById('score-x').textContent = scores.X;
+            document.getElementById('score-o').textContent = scores.O;
         } else {
             console.log('Aucun score trouvé dans le localStorage.');
         }
     }
+    
+    
 //  j1=document.getElementsByClassName('j1').style.backgroundColor  = "blue";
    
     
@@ -107,7 +117,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
  
 // }
 
-
 const cells = document.querySelectorAll('.cell');
     let tour = 0; 
     const positions = { X: [], O: [] };
@@ -122,16 +131,17 @@ const cells = document.querySelectorAll('.cell');
             const [row, col] = target.id.split('-').map(Number);
             positions[currentJoueur].push([row, col]);
     
-            console.log(`Positions de ${currentJoueur}:`, positions[currentJoueur]);
+            // console.log(`Positions de ${currentJoueur}:`, positions[currentJoueur]);
     
             if (checkwinner(row, col, currentJoueur)) {
+                updateScore(currentJoueur);
                 Swal.fire({
                     title: 'Félicitations!',
                     text: `${currentJoueur} a gagné!`,
                     icon: 'success',
                     confirmButtonText: 'OK'
                 }).then(() => {
-                    updateScore(currentJoueur);
+             
                     if (!finGame()) {
                         resetGame();
                     }
