@@ -15,16 +15,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
     }
 
     function iniScore() {
-      
+      console.log( !localStorage.getItem('scores'))
         if (!localStorage.getItem('scores')) {
-            const iniscores = { X: 0, O: 0 };
+            const iniscores = { X: 0 , O: 0 };
             localStorage.setItem('scores', JSON.stringify(iniscores)); 
         }
         afficherscore();
     }
     
     iniScore();
-    
+
+
     function updateScore(winner) {
         console.log('Winner:', winner); 
         const scores = JSON.parse(localStorage.getItem('scores'));
@@ -120,10 +121,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
 const cells = document.querySelectorAll('.cell');
     let tour = 0; 
     const positions = { X: [], O: [] };
-
+    let rest= 10 ;
     function Click(event) {
         const target = event.target;
-    
+        // let rest= 10 ;
         if (target.textContent === '') {
             const currentJoueur = tour % 2 === 0 ? 'X' : 'O';
             target.textContent = currentJoueur;
@@ -141,7 +142,7 @@ const cells = document.querySelectorAll('.cell');
                     icon: 'success',
                     confirmButtonText: 'OK'
                 }).then(() => {
-             
+                     
                     if (!finGame()) {
                         resetGame();
                     }
@@ -149,7 +150,15 @@ const cells = document.querySelectorAll('.cell');
             }
     
             tour++;
+            rest=rest-1;
+            if(rest<0){
+                rest =10;
+            }
+            
         }
+        // console.log(rest)
+        // rest=rest-1;
+        maxgame(tour,rest);
     }
     
 
@@ -191,7 +200,8 @@ function valid(row, col) {
 }
 
 function finGame() {
-    const scores = JSON.parse(localStorage.getItem('score'));
+    const scores = JSON.parse(localStorage.getItem('scores'));
+
     if (scores.x >= 3 || scores.o >= 3) {
         Swal.fire({
             title: 'Félicitations!',
@@ -221,12 +231,26 @@ function finGame() {
 
 
 function resetGame() {
+    
     document.querySelectorAll('.cell').forEach(cell => cell.textContent = '');
     tour = 0;
     positions.X = [];
     positions.O = [];
 }
+function maxgame(tour,rest){
+    console.log(rest);
+    document.getElementById('tours').textContent = rest;
+if(tour>10){
+    tour = 0;
+    // rest=10;
+    document.querySelectorAll('.cell').forEach(cell => cell.textContent = '');
 
+    positions.X = [];
+    positions.O = [];
+    
+}
+
+}
 
 }
 );
